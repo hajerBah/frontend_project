@@ -1,0 +1,15 @@
+<div class="mr-2 col-12 md:col-3">
+  <div class="field">
+    <label for="inputnumber">Price</label>
+    <p-inputNumber inputId="inputnumber" [(ngModel)]="settingValue1"></p-inputNumber>
+  </div>
+
+  <div class="field">
+    <label for="multiselect">Colors</label>
+    <p-multiSelect inputId="multiselect" [options]="colors" optionLabel="name" [(ngModel)]="selectedColors" [filter]="false"></p-multiSelect>
+  </div>
+
+  <p-fileUpload mode="basic" name="demo[]"  accept="image/*" [maxFileSize]="1000000" (onUpload)="onFileUpload($event)"></p-fileUpload>
+
+  <button (click)="onDeleteSetting()">Delete</button>
+</div>

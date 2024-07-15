@@ -1,0 +1,88 @@
+<div class="grid p-fluid">
+	<div class="col-12 md:col-6">
+		<div class="card">
+		
+            <h5>Name</h5>
+			<input id="name" type="text" pInputText [(ngModel)]="name" [ngClass]="{
+				'ng-dirty ng-invalid': nameError !== ''
+			  }">
+			<small id="name" *ngIf="nameError !== ''" class="p-error">Product Name is required.</small>
+			<h5>Description</h5>
+			<textarea rows="5" cols="30" placeholder="Your Message" pInputTextarea [(ngModel)]="description" [ngClass]="{
+				'ng-dirty ng-invalid': descriptionError !== ''
+			  }"></textarea>
+			  <small id="name" *ngIf="descriptionError !== ''" class="p-error">Product Name is required.</small>
+            <h5>Select Category</h5>
+			<p-dropdown [options]="categories" [(ngModel)]="selectedDrop" (onChange)="getValue($event)" placeholder="Select a Category" [showClear]="true"></p-dropdown>
+			<small id="name" *ngIf="categoryError !== ''" class="p-error">Category is required.</small>
+        
+				  <div class="card mt-5">
+					<h5>Product Settings</h5>
+					<div class="mr-2 col-12 md:col-12">
+						<div class="field">
+						  <label for="inputnumber">Price</label>
+						  <p-inputNumber inputId="inputnumber" [(ngModel)]="price"></p-inputNumber>
+						</div>
+					  
+						<div class="field">
+						  <label for="multiselect">Colors</label>
+						  <p-multiSelect inputId="multiselect" [options]="colors" optionLabel="name" [(ngModel)]="selectedColors" [filter]="false"></p-multiSelect>
+						</div>
+
+						<div class="field">
+							<label for="multiselect" class="mr-2">Visibility   </label>
+							<p-inputSwitch [(ngModel)]="valSwitch"></p-inputSwitch>
+						</div>
+						
+						<!-- <p-fileUpload mode="basic" name="demo[]"   accept="image/*" [maxFileSize]="1000000" (onUpload)="onFileUpload($event)"></p-fileUpload> -->
+							<div class="col-span-3 col-3">
+								<button pButton pRipple type="button" label="Add Setting" (click)="addSetting()" class="p-button-success mr-2 mb-2"></button>
+							</div>
+					  </div>
+				  </div>
+
+			
+
+		<div class="relative overflow-x-auto">
+			<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+					<tr>
+						<th scope="col" class="px-6 py-3">
+							Price
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Colors
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Visibility
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let setting of settingsList; index as index">
+						<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+							{{setting.price}}
+						</th>
+						<td class="px-6 py-4">
+							{{getColorNames(setting.colors)}}
+						</td>
+						<td class="px-6 py-4">
+							{{setting.visibility}}
+						</td>
+						<td class="px-6 py-4">
+							<button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteSetting(index)"></button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+
+            <div class="col-12 md:col-3">
+                <button pButton pRipple label="Submit" class= "mb-2" (click)="saveProduct()"></button>
+            </div>
+        </div>
+	</div>
+</div>
+
